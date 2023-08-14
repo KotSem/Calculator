@@ -206,17 +206,14 @@ func fromIntToRoman(number int) (string, error) {
 	if number <= 0 {
 		return "", errorHandler(7)
 	}
+	arr1 := [13]int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
+	arr2 := [13]string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
 	var str string
-	for key, value := range dict {
-		if value == number {
-			return key, nil
-		}
-	}
 	for number > 0 {
-		for key, value := range dict {
-			if dict[key] <= number {
-				str += key
-				number -= value
+		for i := 0; i < 13; i++ {
+			if arr1[i] <= number {
+				str += arr2[i]
+				number -= arr1[i]
 				break
 			}
 		}
